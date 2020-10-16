@@ -1,11 +1,15 @@
 {
-  "name": "city-of-helsinki/drupal-repository",
-  "description": "Repository for City of Helsinki custom modules",
-  "homepage": "https://city-of-helsinki.github.io/drupal-repository",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:druidfi/api_tools.git"
-    }
-  ]
+    "name": "city-of-helsinki/drupal-repository",
+    "description": "Repository for City of Helsinki custom modules",
+    "homepage": "https://city-of-helsinki.github.io/drupal-repository",
+    "include-filename": "all.json",
+    "repositories": [
+        {
+            "packagist.org": false
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:druidfi/api_tools.git"
+        }
+    ]
 }
