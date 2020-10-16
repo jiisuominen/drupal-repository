@@ -4,14 +4,14 @@ This is [composer](https://getcomposer.org/) repository to include custom Drupal
 
 To use this, your `composer.json` should contain:
 
-``json
+```json
 "repositories": [
 {
   "type": "composer",
   "url": "https://city-of-helsinki.github.io/drupal-repository/"
 },
 ]
-``
+```
 
 Head over to https://city-of-helsinki.github.io/drupal-repository/ to browse available packages.
 
