@@ -14,7 +14,6 @@
         {
           "type": "package",
           "package": {
-            "type": "drupal-tools",
             "version": "1.0.0",
             "name": "druid/tools",
             "source": {
