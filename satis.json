@@ -10,6 +10,10 @@
         {
             "type": "vcs",
             "url": "git@github.com:druidfi/api_tools.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:tuutti/oauth2-office365.git"
         }
     ]
 }
