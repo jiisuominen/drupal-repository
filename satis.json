@@ -10,6 +10,18 @@
         {
             "type": "vcs",
             "url": "git@github.com:druidfi/api_tools.git"
+        },
+        {
+          "type": "package",
+          "package": {
+            "type": "tools",
+            "name": "druidfi/tools",
+            "url": "git@github.com:druidfi/tools.git"
+          }
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/drupal-base.git"
         }
     ]
 }
