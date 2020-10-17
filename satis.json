@@ -15,6 +15,7 @@
           "type": "package",
           "package": {
             "type": "tools",
+            "version": "dev-master",
             "name": "druidfi/tools",
             "url": "git@github.com:druidfi/tools.git"
           }
