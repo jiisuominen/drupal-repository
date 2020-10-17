@@ -1,4 +1,4 @@
-name: Build packages
+name: Build package repository
 on:
   push:
     branches:
@@ -9,11 +9,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build packages
         run: make
 
-      - name: Commit built package
+      - name: Publish packages
         run: |
           cd dist/
           git config --global user.name 'github-actions[bot]'
