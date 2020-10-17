@@ -18,7 +18,7 @@
             "version": "1.0.0",
             "name": "druid/tools",
             "source": {
-              "type": "vcs",
+              "type": "git",
               "url": "git@github.com:druidfi/tools.git",
               "reference": "dev-master"
             }
