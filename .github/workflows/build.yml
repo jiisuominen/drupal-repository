@@ -1,5 +1,8 @@
 name: Build package repository
 on:
+  schedule:
+    # Rebuild every 12 hours
+    - cron: '0 */12 * * *'
   push:
     branches:
       - master
