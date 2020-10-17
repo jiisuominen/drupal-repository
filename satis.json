@@ -15,9 +15,13 @@
           "type": "package",
           "package": {
             "type": "tools",
-            "version": "dev-master",
+            "version": "1.0.0",
             "name": "druid/tools",
-            "url": "git@github.com:druidfi/tools.git"
+            "source": {
+              "type": "vcs",
+              "url": "git@github.com:druidfi/tools.git",
+              "reference": "dev-master"
+            }
           }
         },
         {
