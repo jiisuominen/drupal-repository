@@ -16,10 +16,9 @@
           "package": {
             "version": "1.0.0",
             "name": "druid/tools",
-            "source": {
-              "type": "git",
-              "url": "git@github.com:druidfi/tools.git",
-              "reference": "master"
+            "dist": {
+              "type": "zip",
+              "url": "https://github.com/druidfi/tools/archive/master.zip"
             }
           }
         },
