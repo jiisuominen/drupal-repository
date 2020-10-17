@@ -7,18 +7,13 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: php-actions/composer@v2
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build packages
-        run: make
-
+      - uses: actions/checkout@v2
       - name: Publish packages
         run: |
-          cd dist/
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          make
+          cd dist/
           git commit -am "Package ${GITHUB_SHA}"
           git push
