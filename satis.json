@@ -25,6 +25,13 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-base.git"
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/drupal-hdbt.git"
         }
-    ]
+    ],
+    "require": {
+        "drupal/hdbt": "~1.0"
+    }
 }
