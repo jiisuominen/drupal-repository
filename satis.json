@@ -29,6 +29,10 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-hdbt.git"
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-api-base.git"
         }
     ]
 }
