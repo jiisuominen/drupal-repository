@@ -36,7 +36,7 @@
         },
         {
           "type": "vcs",
-          "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-trp.git"
+          "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tpr.git"
         }
     ]
 }
