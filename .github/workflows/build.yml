@@ -12,7 +12,7 @@ jobs:
       - uses: php-actions/composer@v3
 
       - name: Configure access token
-        run: composer config github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
+        run: composer -g config github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build package repository
         run: vendor/bin/satis build satis.json public -vvvv
