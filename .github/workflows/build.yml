@@ -15,7 +15,7 @@ jobs:
         run: composer -g config github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build package repository
-        run: vendor/bin/satis build satis.json public -vvvv
+        run: vendor/bin/satis build satis.json public
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
