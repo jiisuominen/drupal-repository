@@ -1,8 +1,5 @@
 name: Build package repository
 on:
-  schedule:
-    # Rebuild every 12 hours
-    - cron: '0 */12 * * *'
   push:
     branches:
       - main
@@ -12,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v2
+      - uses: php-actions/composer@v3
 
       - name: Build package repository
         run: vendor/bin/satis build satis.json public
