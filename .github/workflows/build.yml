@@ -10,15 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v3
-        with:
-          composer_version: '2'
-          php_version: '7.4'
+
+      - name: Configure access token
+        run: composer config github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build package repository
         run: vendor/bin/satis build satis.json public -vvvv
-
-      - name: Configure access token
-        run: composer config -g github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
