@@ -12,17 +12,6 @@
             "url": "git@github.com:druidfi/api_tools.git"
         },
         {
-          "type": "package",
-          "package": {
-            "version": "1.0.0",
-            "name": "druid/tools",
-            "dist": {
-              "type": "zip",
-              "url": "https://github.com/druidfi/tools/archive/master.zip"
-            }
-          }
-        },
-        {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-helfi-platform.git"
         },
@@ -41,6 +30,10 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tpr.git"
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tunnistamo.git"
         }
     ]
 }
