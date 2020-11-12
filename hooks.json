@@ -53,6 +53,10 @@
       {
         "source": "string",
         "name": "update-repository"
+      },
+      {
+        "source": "string",
+        "name": "dist"
       }
     ],
     "trigger-rule":
