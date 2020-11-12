@@ -9,4 +9,4 @@ RUN php composer-setup.php --install-dir=/bin --filename=composer
 RUN php -r "unlink('composer-setup.php');"
 
 COPY hooks.json /etc/webhook/hooks.json
-CMD ["-verbose", "-hooks=/etc/webhook/hooks.json"]
+CMD ["-verbose", "-hooks=/etc/webhook/hooks.json", "-template"]
