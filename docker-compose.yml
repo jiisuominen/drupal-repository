@@ -32,9 +32,9 @@ services:
       - internal
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`repository.drupal.hel.ninja`)"
-      - "traefik.http.routers.app.tls=true"
-      - "traefik.http.routers.app.tls.certresolver=le"
+      - "traefik.http.routers.nginx.rule=Host(`repository.drupal.hel.ninja`)"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.routers.nginx.tls.certresolver=le"
 
 networks:
   internal:
