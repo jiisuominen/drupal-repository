@@ -4,7 +4,13 @@ COMPOSER := $(shell which composer.phar 2>/dev/null || which composer 2>/dev/nul
 
 .PHONY := update-repository docker-build docker-attach
 
-all: update-repository dist
+default: dist
+
+GITHUN_TOKEN := $(shell composer -g config github-oauth.github.com)
+
+ifeq ($(GITHUB_TOKEN),"")
+	@composer -g config github-oauth.github.com ${GITHUB_OAUTH}
+endif
 
 docker-build:
 	docker-compose build --no-cache
@@ -15,11 +21,11 @@ docker-attach:
 	docker-compose exec app sh
 
 update-repository:
+	git checkout .
 	git pull
 
-dist:
-	composer -g config github-oauth.github.com ${GITHUB_OAUTH}
-	$(PHP) $(SATIS)
+dist: $(SATIS) Makefile satis.json
+	$(PHP) $(SATIS) build satis.json dist
 
 $(SATIS): composer.lock
 	$(PHP) $(COMPOSER) install
