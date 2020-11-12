@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: "drupal-repository-webhook"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      restart: always
+    volumes:
+      - .:/app:delegated
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`repository.drupal.hel.ninja`)"
+      - "traefik.http.routers.app.tls=true"
+      - "traefik.http.routers.app.tls.certresolver=le"
+    networks:
+      - internal
+      - traefik-network
+
+networks:
+  internal:
+    external: false
+  traefik-network:
+    external: true

@@ -1,0 +1,45 @@
+global:
+  sendAnonymousUsage: false
+
+log:
+  level: "WARNING"
+#  filePath: debug.log
+#  format: json
+
+#accesslog:
+#  filePath: access.log
+#  bufferingSize: 100
+
+api:
+  dashboard: true
+  debug: true
+  insecure: false
+
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+  https:
+    address: ":443"
+
+providers:
+  docker:
+    network: "{{ traefik_network }}"
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+#  file:
+#    directory: "/configuration"
+#    watch: true
+
+certificatesResolvers:
+  le:
+    acme:
+      email: ext.lari.rauno@hel.fi
+      storage: /home/acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: http

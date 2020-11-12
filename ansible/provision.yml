@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker
+    - traefik
+
+  tasks:
+    - name: "Create required backend folders"
+      file:
+        path: "/var/www/docker/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - drupal-repository

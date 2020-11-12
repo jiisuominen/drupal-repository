@@ -1,0 +1,34 @@
+[
+  {
+    "id": "update-index",
+    "execute-command": "make dist",
+    "command-working-directory": "/app",
+    "response-message": "Success",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "trigger-rule":
+    {
+      "and":
+      [
+        {
+          "match":
+          {
+            "type": "payload-hash-sha1",
+            "secret": "{{ getenv "WEBHOOK_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
+

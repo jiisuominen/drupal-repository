@@ -2,16 +2,25 @@ PHP := php -dmemory_limit=-1
 SATIS := vendor/bin/satis
 COMPOSER := $(shell which composer.phar 2>/dev/null || which composer 2>/dev/null)
 
-.PHONY := all dist/packages.json
+.PHONY := update-repository docker-build docker-attach
 
-all: dist/packages.json
+all: update-repository dist
 
-dist/packages.json: dist/.git $(SATIS) Makefile satis.json
-		$(PHP) $(SATIS) build satis.json dist
+docker-build:
+	docker-compose build --no-cache
+	docker-compose stop
+	docker-compose up -d
 
-dist/.git:
-		git clone git@github.com:City-of-Helsinki/drupal-repository.git dist -b gh-pages --depth=1
+docker-attach:
+	docker-compose exec app sh
+
+update-repository:
+	git pull
+
+dist:
+	composer -g config github-oauth.github.com ${GITHUB_OAUTH}
+	$(PHP) $(SATIS)
 
 $(SATIS): composer.lock
-		$(PHP) $(COMPOSER) install
-		touch $@
+	$(PHP) $(COMPOSER) install
+	touch $@
