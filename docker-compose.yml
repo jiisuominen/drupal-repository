@@ -9,6 +9,7 @@ services:
     restart: always
     volumes:
       - .:/app:delegated
+      - hooks.json:/etc/webhook/hooks.json
     env_file:
       - .env
     labels:
