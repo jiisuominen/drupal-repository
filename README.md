@@ -8,7 +8,7 @@ To use this, your `composer.json` should contain:
 "repositories": [
     {
         "type": "composer",
-        "url": "https://city-of-helsinki.github.io/drupal-repository/"
+        "url": "https://repository.drupal.hel.ninja/"
     },
 ]
 ```
