@@ -1,7 +1,7 @@
 [
   {
     "id": "update-index",
-    "execute-command": "make dist",
+    "execute-command": "make",
     "command-working-directory": "/app",
     "response-message": "Success",
     "response-headers":
@@ -10,6 +10,10 @@
         "name": "Access-Control-Allow-Origin",
         "value": "*"
       }
+    ],
+    "pass-arguments-to-command":
+    [
+      "dist"
     ],
     "trigger-rule":
     {
