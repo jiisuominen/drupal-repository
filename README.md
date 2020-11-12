@@ -13,6 +13,14 @@ To use this, your `composer.json` should contain:
 ]
 ```
 
-Head over to https://city-of-helsinki.github.io/drupal-repository/ to browse available packages.
+## Webhook to automatically update your package
 
-__NOTE__: actual composer repository is on [gh-pages](https://github.com/City-of-Helsinki/drupal-repository/tree/gh-pages) branch.
+`https://webhook.drupal.hel.ninja/hooks/update-index` 
+
+Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact)
+
+## Contact
+
+Slack: #helfi-drupal (http://helsinkicity.slack.com/)
+
+Mail: helfi-drupal-aaaactuootjhcono73gc34rj2u@druid.slack.com
