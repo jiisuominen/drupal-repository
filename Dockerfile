@@ -8,5 +8,4 @@ RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'c31c1e292ad7be5f4
 RUN php composer-setup.php --install-dir=/bin --filename=composer
 RUN php -r "unlink('composer-setup.php');"
 
-COPY hooks.json /etc/webhook/hooks.json
 CMD ["-verbose", "-hooks=/etc/webhook/hooks.json", "-template"]
