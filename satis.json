@@ -35,14 +35,5 @@
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tunnistamo.git"
         }
-    ],
-    "require": {
-      "city-of-helsinki/drupal-helfi-platform": "dev-main",
-      "drupal/api_tools": "8.x-1.x-dev",
-      "drupal/helfi_tpr": "1.x-dev",
-      "drupal/helfi_api_base": "1.x-dev",
-      "drupal/helfi_tunnistamo": "1.x-dev",
-      "drupal/hdbt": "1.x-dev",
-      "drupal/hdbt_admin": "1.x-dev"
-    }
+    ]
 }
