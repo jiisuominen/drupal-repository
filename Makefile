@@ -6,12 +6,6 @@ COMPOSER := $(shell which composer.phar 2>/dev/null || which composer 2>/dev/nul
 
 default: dist
 
-GITHUN_TOKEN := $(shell composer -g config github-oauth.github.com)
-
-ifeq ($(GITHUB_TOKEN),"")
-	@composer -g config github-oauth.github.com ${GITHUB_OAUTH}
-endif
-
 docker-build:
 	docker-compose build --no-cache
 	docker-compose stop
@@ -26,6 +20,7 @@ update-repository:
 	git pull
 
 dist: $(SATIS) Makefile satis.json
+	composer -g config github-oauth.github.com ${GITHUB_OAUTH}
 	$(PHP) $(SATIS) build satis.json dist
 
 $(SATIS): composer.lock
