@@ -21,7 +21,7 @@ services:
       - internal
       - traefik-network
   nginx:
-    container_name: nginx
+    container_name: "drupal-repository-nginx"
     image: nginx:alpine
     restart: always
     volumes:
