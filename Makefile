@@ -22,6 +22,7 @@ docker-attach:
 
 update-repository:
 	git checkout .
+	git clean -f
 	git pull
 
 dist: $(SATIS) Makefile satis.json
