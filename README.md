@@ -13,9 +13,18 @@ To use this, your `composer.json` should contain:
 ]
 ```
 
+## Setting required env variables 
+
+*NOTE:* This is only required on the remote server.
+
+Create .env file to your git root that contains:
+
+- `GITHUB_OAUTH=your-github-oauth-token`
+- `WEBHOOK_SECRET=your-webhook-secret`
+
 ## Webhook to automatically update your package
 
-`https://webhook.drupal.hel.ninja/hooks/update-index` 
+`https://webhook.drupal.hel.ninja/hooks/update-index`
 
 Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact).
 
