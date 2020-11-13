@@ -17,7 +17,7 @@ To use this, your `composer.json` should contain:
 
 *NOTE:* This is only required on the remote server.
 
-Create .env file to your git root that contains:
+Create .env file that contains:
 
 - `GITHUB_OAUTH=your-github-oauth-token`
 - `WEBHOOK_SECRET=your-webhook-secret`
