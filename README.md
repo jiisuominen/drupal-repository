@@ -17,7 +17,7 @@ To use this, your `composer.json` should contain:
 
 `https://webhook.drupal.hel.ninja/hooks/update-index` 
 
-Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact)
+Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact).
 
 ## Contact
 
