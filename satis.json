@@ -34,6 +34,10 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tunnistamo.git"
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/drupal-helfi-platform-config.git"
         }
     ]
 }
