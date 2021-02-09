@@ -42,6 +42,10 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-ahjo.git"
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/php-hauki-client.git"
         }
     ]
 }
