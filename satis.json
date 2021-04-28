@@ -58,10 +58,6 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-linkedevents.git"
-        },
-        {
-          "type": "vcs",
-          "url": "git@github.com:City-of-Helsinki/drupal-hdbt-starter-theme.git"
         }
     ]
 }
