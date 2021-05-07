@@ -24,7 +24,10 @@ Create .env file that contains:
 
 ## Webhook to automatically update your package
 
-`https://webhook.drupal.hel.ninja/hooks/update-index`
+Go to Settings -> Webhooks -> Add webhook
+
+- Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-index`
+- Content type: `application/json`
 
 Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact).
 
