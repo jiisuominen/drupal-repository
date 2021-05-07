@@ -22,6 +22,10 @@ Create .env file that contains:
 - `GITHUB_OAUTH=your-github-oauth-token`
 - `WEBHOOK_SECRET=your-webhook-secret`
 
+## Adding your own package here
+
+See [Contact](#contact).
+
 ## Webhook to automatically update your package
 
 Go to Settings -> Webhooks -> Add webhook
