@@ -62,6 +62,10 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-azure-fs.git"
-        }       
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:tuutti/des-connector.git"
+        }  
     ]
 }
