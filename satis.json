@@ -73,7 +73,7 @@
         },
         {
           "type": "vcs",
-          "url": "git@github.com:City-of-Helsinki/flysystem-stream-wrapper.git"
+          "url": "git@github.com:City-of-Helsinki/stream-util.git"
         }
     ]
 }
