@@ -74,6 +74,10 @@
         {
           "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/stream-util.git"
+        },
+        {
+          "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-proxy.git"
         }
     ]
 }
