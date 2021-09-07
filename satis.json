@@ -77,6 +77,10 @@
         },
         {
           "type": "vcs",
+          "url": "git@github.com:City-of-Helsinki/htmlpagedom.git"
+        },
+        {
+          "type": "vcs",
           "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-proxy.git"
         }
     ]
