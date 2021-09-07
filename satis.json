@@ -77,7 +77,7 @@
         },
         {
           "type": "vcs",
-          "url": "git@github.com:City-of-Helsinki/htmlpagedom.git"
+          "url": "git@github.com:City-of-Helsinki/php-htmlpagedom.git"
         },
         {
           "type": "vcs",
