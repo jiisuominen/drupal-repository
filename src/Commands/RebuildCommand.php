@@ -21,6 +21,22 @@ final class RebuildCommand extends BaseCommand
         );
     }
 
+    private function repositoryToPackageName(string $repository) :? string
+    {
+        $data = json_decode(file_get_contents('satis.json'));
+
+        foreach ($data->repositories as $item) {
+            if (!isset($item->url)) {
+                continue;
+            }
+
+            if (str_contains(strtolower($item->url), strtolower($repository))) {
+                return $item->name;
+            }
+        }
+        return null;
+    }
+
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this
@@ -28,8 +44,8 @@ final class RebuildCommand extends BaseCommand
 
         $args = ['/usr/bin/php', '-dmemory_limit=-1', 'vendor/bin/satis', 'build', 'satis.json', 'dist'];
 
-        if ($package = $input->getArgument('package')) {
-            $args[] = $package;
+        if ($repository = $input->getArgument('package')) {
+            $args[] = $this->repositoryToPackageName($repository);
         }
         $process = (new Process($args))
             ->setTimeout(3600);

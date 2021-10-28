@@ -8,47 +8,47 @@
             "packagist.org": false
         },
         {
-            "name": "druidfi/api_tools",
+            "name": "drupal/api_tools",
             "type": "vcs",
             "url": "git@github.com:druidfi/api_tools.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-helfi-platform",
+            "name": "city-of-helsinki/drupal-helfi-platform",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-helfi-platform.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-hdbt",
+            "name": "drupal/hdbt",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-hdbt.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-hdbt-admin",
+            "name": "drupal/hdbt_admin",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-hdbt-admin.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-api-base",
+            "name": "drupal/hdbt_admin",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-api-base.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-tpr",
+            "name": "drupal/helfi_tpr",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tpr.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-tunnistamo",
+            "name": "drupal/helfi_tunnistamo",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tunnistamo.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-helfi-platform-config",
+            "name": "drupal/helfi_platform_config",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-helfi-platform-config.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-ahjo",
+            "name": "drupal/helfi_ahjo",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-ahjo.git"
         },
@@ -58,52 +58,52 @@
             "url": "git@github.com:City-of-Helsinki/php-hauki-client.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-hauki",
+            "name": "drupal/helfi_hauki",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-hauki.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-grant-application",
+            "name": "drupal/helfi_grant_applications_config",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-grant-application.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-linkedevents",
+            "name": "drupal/helfi_linkedevents",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-linkedevents.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-azure-fs",
+            "name": "drupal/helfi_azure_fs",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-azure-fs.git"
         },
         {
-            "name": "tuutti/des-connector",
+            "name": "nodespark/des-connector",
             "type": "vcs",
             "url": "git@github.com:tuutti/des-connector.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-media-map",
+            "name": "drupal/helfi_media_map",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-media-map.git"
         },
         {
-            "name": "City-of-Helsinki/stream-util",
+            "name": "twistor/stream-util",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/stream-util.git"
         },
         {
-            "name": "City-of-Helsinki/php-htmlpagedom",
+            "name": "wa72/htmlpagedom",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/php-htmlpagedom.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-proxy",
+            "name": "drupal/helfi_proxy",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-proxy.git"
         },
         {
-            "name": "City-of-Helsinki/drupal-module-helfi-media-formtool",
+            "name": "drupal/helfi_media_formtool",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-media-formtool.git"
         }
