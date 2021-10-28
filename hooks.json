@@ -74,7 +74,7 @@
           "match":
           {
             "type": "payload-hmac-sha1",
-            "secret": "{{ getenv "WEBHOOK_REPOSITORY_SECRET" }}",
+            "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
             "parameter":
             {
               "source": "header",

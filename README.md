@@ -26,14 +26,19 @@ Go to Settings -> Webhooks -> Add webhook
 
 Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact).
 
-## Setting required env variables 
+## Setting required env variables
 
 *NOTE:* This is only required on the remote server.
 
 Create .env file that contains:
 
-- `GITHUB_OAUTH=your-github-oauth-token`
-- `WEBHOOK_SECRET=your-webhook-secret`
+```
+GITHUB_OAUTH=your-github-oauth-token
+# This is used to update individual packages
+WEBHOOK_SECRET=your-webhook-secret
+# This is used by this repository to trigger rebuilds
+WEBHOOK_UPDATE_SECRET=your-webhook-secret
+```
 
 ## Contact
 
