@@ -1,28 +1,36 @@
-PHP := php -dmemory_limit=-1
-SATIS := vendor/bin/satis
+DOCKER_COMPOSE_V2 := $(shell docker compose > /dev/null 2>&1 && echo "yes" || echo "no")
+
+ifeq ($(DOCKER_COMPOSE_V2),yes)
+	DOCKER_COMPOSE_CMD := docker compose
+else
+	DOCKER_COMPOSE_CMD := docker-compose
+endif
+
+PHP := /usr/bin/php -dmemory_limit=-1
+GIT := /usr/bin/git
 COMPOSER := $(shell which composer.phar 2>/dev/null || which composer 2>/dev/null)
+COMPOSER_AUTH = ${HOME}/.composer/auth.json
 
 .PHONY := update-repository docker-build docker-attach
 
 default: dist
 
 docker-build:
-	docker-compose build --no-cache
-	docker-compose stop
-	docker-compose up -d
+	$(DOCKER_COMPOSE_CMD) build --no-cache
+	$(DOCKER_COMPOSE_CMD) stop
+	$(DOCKER_COMPOSE_CMD) up -d
 
 docker-attach:
-	docker-compose exec app sh
+	$(DOCKER_COMPOSE_CMD) exec app sh
 
 update-repository:
-	git checkout .
-	git clean -f
-	git pull
+	$(GIT) checkout .
+	$(GIT) clean -f
+	$(GIT) pull
 
-dist: $(SATIS) Makefile satis.json
+$(COMPOSER_AUTH):
 	composer -g config github-oauth.github.com ${GITHUB_OAUTH}
-	$(PHP) $(SATIS) build satis.json dist
 
-$(SATIS): composer.lock
+dist: $(COMPOSER_AUTH) Makefile satis.json composer.lock
 	$(PHP) $(COMPOSER) install
 	touch $@

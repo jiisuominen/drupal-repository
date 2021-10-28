@@ -4,3 +4,4 @@ ansible/roles/roles
 # ignore /dist/ on this branch, see 'gh-pages' branch for actual contents
 /dist/
 .env
+data.json
