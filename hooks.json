@@ -1,7 +1,7 @@
 [
   {
     "id": "update-index",
-    "execute-command": "make",
+    "execute-command": "/usr/bin/make",
     "command-working-directory": "/app",
     "response-message": "Success",
     "response-headers":
@@ -24,7 +24,7 @@
         {
           "match":
           {
-            "type": "payload-hash-sha1",
+            "type": "payload-hmac-sha1",
             "secret": "{{ getenv "WEBHOOK_SECRET" }}",
             "parameter":
             {
@@ -38,7 +38,7 @@
   },
   {
     "id": "update-repository",
-    "execute-command": "make",
+    "execute-command": "/usr/bin/make",
     "command-working-directory": "/app",
     "response-message": "Success",
     "response-headers":
@@ -65,7 +65,7 @@
         {
           "match":
           {
-            "type": "payload-hash-sha1",
+            "type": "payload-hmac-sha1",
             "secret": "{{ getenv "WEBHOOK_SECRET" }}",
             "parameter":
             {
