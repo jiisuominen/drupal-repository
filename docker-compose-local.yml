@@ -6,7 +6,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: always
     volumes:
       - .:/app:delegated
       - ./hooks.json:/etc/webhook/hooks.json
@@ -25,7 +24,6 @@ services:
   nginx:
     container_name: "drupal-repository-nginx"
     image: nginx:alpine
-    restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./dist:/usr/share/nginx/html
