@@ -9,13 +9,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
-final class RebuildCommand extends BaseCommand
+final class RebuildPackageIndex extends BaseCommand
 {
     protected static $defaultName = 'app:rebuild';
 
     public function configure()
     {
-        $this->addArgument('package',
+        $this->addArgument(
+            'package',
             InputArgument::OPTIONAL,
             'The package to update. Leave empty to update all.'
         );
