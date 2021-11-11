@@ -38,14 +38,14 @@ final class TriggerDispatchEvent extends BaseCommand
             ->ensureInstallation($output);
 
         $workflowId = $input->getArgument('workflowId');
-        $setting    = $this->settings->getJsonSetting(Settings::DISPATCH_SETTINGS);
+        $setting    = $this->settings->getConfig(Settings::DISPATCH_TRIGGER);
 
         if (!isset($setting[$workflowId])) {
             throw new \InvalidArgumentException('Settings for given workflowId not found.');
         }
 
         $this->client->authenticate(
-            $this->settings->getSetting(Settings::GITHUB_OAUTH),
+            $this->settings->getEnv(Settings::GITHUB_OAUTH),
             authMethod: Client::AUTH_ACCESS_TOKEN
         );
 
@@ -53,11 +53,11 @@ final class TriggerDispatchEvent extends BaseCommand
             [
                 'username' => $username,
                 'repository' => $repository,
-                'defaultBranch' => $ref,
             ] = $setting;
 
-            $this->client->repo()->workflows()
-                ->dispatches($username, $repository, $workflowId, $ref);
+            $this->client->repo()->dispatch($username, $repository, 'config_change', [
+                'time' => time()
+            ]);
         }
         return Command::SUCCESS;
     }
