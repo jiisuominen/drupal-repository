@@ -15,11 +15,6 @@ COMPOSER_AUTH = ${HOME}/.composer/auth.json
 
 default: dist
 
-docker-build:
-	$(DOCKER_COMPOSE_CMD) build --no-cache
-	$(DOCKER_COMPOSE_CMD) stop
-	$(DOCKER_COMPOSE_CMD) up -d
-
 docker-attach:
 	$(DOCKER_COMPOSE_CMD) exec app sh
 

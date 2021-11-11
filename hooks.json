@@ -1,9 +1,52 @@
 [
   {
+    "id": "trigger-dispatch",
+    "execute-command": "/usr/bin/php",
+    "command-working-directory": "/app",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "pass-arguments-to-command":
+    [
+      {
+        "source": "string",
+        "name": "console.php"
+      },
+      {
+        "source": "string",
+        "name": "app:dispatch"
+      },
+      {
+        "source": "string",
+        "name": "config-update"
+      }
+    ],
+    "trigger-rule":
+    {
+      "and": [
+        {
+          "match":
+          {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
     "id": "update-index",
     "execute-command": "/usr/bin/php",
     "command-working-directory": "/app",
-    "response-message": "Success",
     "response-headers":
     [
       {
@@ -48,7 +91,6 @@
     "id": "update-repository",
     "execute-command": "/usr/bin/make",
     "command-working-directory": "/app",
-    "response-message": "Success",
     "response-headers":
     [
       {

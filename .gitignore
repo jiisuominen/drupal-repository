@@ -5,3 +5,4 @@ ansible/roles/roles
 /dist/
 .env
 data.json
+test.php
