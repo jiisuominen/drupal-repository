@@ -3,9 +3,7 @@ version: '3.7'
 services:
   app:
     container_name: "drupal-repository-webhook"
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/city-of-helsinki/drupal-repository:latest
     volumes:
       - .:/app:delegated
       - ./hooks.json:/etc/webhook/hooks.json
