@@ -17,11 +17,11 @@ $config = [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-kymp',
             ],
-            /*[
+            [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-sote',
             ],
-            [
+            /*[
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-tyo-yrittaminen',
             ],
