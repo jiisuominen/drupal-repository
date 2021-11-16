@@ -21,7 +21,11 @@ $config = [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-sote',
             ],
-            /*[
+            [
+                'username' => 'City-of-Helsinki',
+                'repository' => 'drupal-helfi-strategia',
+            ],
+            [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-tyo-yrittaminen',
             ],
@@ -29,10 +33,6 @@ $config = [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-kasvatus-koulutus',
             ],
-            [
-                'username' => 'City-of-Helsinki',
-                'repository' => 'drupal-helfi-strategia',
-            ],*/
         ],
     ],
 ];
