@@ -106,6 +106,11 @@
             "name": "drupal/helfi_media_formtool",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-media-formtool.git"
-        }
+        },
+        {
+            "name": "drupal/helfi_drush_tools",
+            "type": "vcs",
+            "url": "git@github.com:City-of-Helsinki/drupal-drush-tools.git"
+        }        
     ]
 }
