@@ -1,3 +1,5 @@
+-include .env
+
 DOCKER_COMPOSE_V2 := $(shell docker compose > /dev/null 2>&1 && echo "yes" || echo "no")
 
 ifeq ($(DOCKER_COMPOSE_V2),yes)
