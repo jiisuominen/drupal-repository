@@ -13,7 +13,7 @@ GIT := /usr/bin/git
 COMPOSER := $(shell which composer.phar 2>/dev/null || which composer 2>/dev/null)
 COMPOSER_AUTH = ${HOME}/.composer/auth.json
 
-.PHONY := update-repository docker-build docker-attach
+.PHONY := update-repository docker-build docker-attach dist
 
 default: dist
 
@@ -28,6 +28,5 @@ update-repository:
 $(COMPOSER_AUTH):
 	composer -g config github-oauth.github.com ${GITHUB_OAUTH}
 
-dist: $(COMPOSER_AUTH) Makefile satis.json composer.lock
+dist: $(COMPOSER_AUTH)
 	$(PHP) $(COMPOSER) install
-	touch $@
