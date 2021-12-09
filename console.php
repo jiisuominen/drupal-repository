@@ -33,6 +33,10 @@ $config = [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-kasvatus-koulutus',
             ],
+            [
+                'username' => 'City-of-Helsinki',
+                'repository' => 'drupal-helfi-asuminen',
+            ],
         ],
     ],
 ];
