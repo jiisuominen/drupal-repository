@@ -31,6 +31,18 @@
         {
           "match":
           {
+            "type": "value",
+            "value": "published",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "action"
+            }
+          }
+        },
+        {
+          "match":
+          {
             "type": "payload-hmac-sha1",
             "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
             "parameter":
