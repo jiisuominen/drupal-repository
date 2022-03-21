@@ -29,4 +29,4 @@ $(COMPOSER_AUTH):
 	composer -g config github-oauth.github.com ${GITHUB_OAUTH}
 
 dist: $(COMPOSER_AUTH)
-	$(PHP) $(COMPOSER) install
+	$(PHP) $(COMPOSER) install --no-progress --profile --prefer-dist --no-interaction --no-dev --optimize-autoloader
