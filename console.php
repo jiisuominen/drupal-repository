@@ -41,6 +41,10 @@ $config = [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-etusivu',
             ],
+	    [
+                'username' => 'City-of-Helsinki',
+		'repository' => 'drupal-helfi-kuva',
+            ],
         ],
     ],
 ];
