@@ -21,6 +21,7 @@ docker-attach:
 	$(DOCKER_COMPOSE_CMD) exec app sh
 
 update-repository:
+	$(GIT) --global --add safe.directory /app
 	$(GIT) checkout .
 	$(GIT) clean -f
 	$(GIT) pull
