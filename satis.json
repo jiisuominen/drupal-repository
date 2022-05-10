@@ -126,6 +126,11 @@
             "name": "drupal/helfi_yjdh",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-yjdh.git"
+        },
+        {
+            "name": "helfi_formtool_embed",
+            "type": "vcs",
+            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-form-tool-embed.git"
         }
     ]
 }
