@@ -24,9 +24,9 @@ Go to Settings -> Webhooks -> Add webhook
 - Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-index`
 - Content type: `application/json`
 
-Secret can be found from `helsinkiportaali` confluence or by contacting us directly. See [Contact](#contact).
+Secret can be found on [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) confluence page or by contacting us directly. See [Contact](#contact).
 
-## Setting required env variables
+## Development
 
 *NOTE:* This is only required on the remote server.
 
@@ -39,6 +39,7 @@ WEBHOOK_SECRET=your-webhook-secret
 # This is used by this repository to trigger rebuilds
 WEBHOOK_UPDATE_SECRET=your-webhook-secret
 ```
+See [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) page on confluence for more information.
 
 ## Contact
 
