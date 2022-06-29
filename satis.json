@@ -58,7 +58,7 @@
             "url": "git@github.com:City-of-Helsinki/php-hauki-client.git"
         },
         {
-            "name": "City-of-Helsinki/helfi-etusivu-news-search",
+            "name": "city-of-helsinki/helfi-etusivu-news-search",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/helfi-etusivu-news-search.git"
         },
