@@ -131,6 +131,11 @@
             "name": "drupal/helfi_formtool_embed",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-form-tool-embed.git"
+        },
+        {
+            "name": "drupal/helfi_gredi",
+            "type": "vcs",
+            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-gredi.git"
         }
     ]
 }
