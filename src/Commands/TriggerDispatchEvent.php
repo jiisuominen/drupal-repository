@@ -62,7 +62,7 @@ final class TriggerDispatchEvent extends BaseCommand
                 ]);
             } catch (\Exception $e) {
                 $output->writeln(
-                    sprintf('Dispatch failed for: %s/%s', $username, $repository)
+                    sprintf('Dispatch failed for: %s/%s. Read https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/7615512577/Uuden+ymp+rist+n+pystytys for information about how to proceed with this.', $username, $repository)
                 );
                 $failures++;
             }
