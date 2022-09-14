@@ -49,16 +49,24 @@ final class TriggerDispatchEvent extends BaseCommand
             authMethod: Client::AUTH_ACCESS_TOKEN
         );
 
+        $failures = 0;
         foreach ($setting[$workflowId] as $setting) {
             [
                 'username' => $username,
                 'repository' => $repository,
             ] = $setting;
 
-            $this->client->repo()->dispatch($username, $repository, 'config_change', [
-                'time' => time()
-            ]);
+            try {
+                $this->client->repo()->dispatch($username, $repository, 'config_change', [
+                  'time' => time()
+                ]);
+            } catch (\Exception $e) {
+                $output->writeln(
+                    sprintf('Dispatch failed for: %s/%s', $username, $repository)
+                );
+                $failures++;
+            }
         }
-        return Command::SUCCESS;
+        return $failures > 0 ? Command::FAILURE : Command::SUCCESS;
     }
 }
