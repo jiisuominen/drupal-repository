@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Settings;
+use Github\AuthMethod;
 use Github\Client;
+use Github\Exception\ExceptionInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,10 +19,10 @@ final class TriggerDispatchEvent extends BaseCommand
 
     public function __construct(
         private Client $client,
-        private Settings $settings,
+        Settings $settings,
         string $name = null
     ) {
-        parent::__construct($name);
+        parent::__construct($settings, $name);
     }
 
     public function configure()
@@ -38,18 +40,18 @@ final class TriggerDispatchEvent extends BaseCommand
             ->ensureInstallation($output);
 
         $workflowId = $input->getArgument('workflowId');
-        $setting    = $this->settings->getConfig(Settings::DISPATCH_TRIGGER);
+        $setting    = $this->settings->get(Settings::DISPATCH_TRIGGER);
 
         if (!isset($setting[$workflowId])) {
             throw new \InvalidArgumentException('Settings for given workflowId not found.');
         }
 
         $this->client->authenticate(
-            $this->settings->getEnv(Settings::GITHUB_OAUTH),
-            authMethod: Client::AUTH_ACCESS_TOKEN
+            $this->settings->get(Settings::GITHUB_OAUTH),
+            authMethod: AuthMethod::ACCESS_TOKEN
         );
 
-        $failures = 0;
+        $exception = null;
         foreach ($setting[$workflowId] as $setting) {
             [
                 'username' => $username,
@@ -60,13 +62,25 @@ final class TriggerDispatchEvent extends BaseCommand
                 $this->client->repo()->dispatch($username, $repository, 'config_change', [
                   'time' => time()
                 ]);
-            } catch (\Exception $e) {
+            } catch (ExceptionInterface $exception) {
                 $output->writeln(
-                    sprintf('Dispatch failed for: %s/%s. Read https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/7615512577/Uuden+ymp+rist+n+pystytys for information about how to proceed with this.', $username, $repository)
+                    vprintf('[Github error] Dispatch failed for: %s/%s. See %s for more information.', [
+                      $username,
+                      $repository,
+                      'https://github.com/City-of-Helsinki/drupal-helfi-platform/blob/main/documentation/automatic-updates.md#automatically-trigger-config-update-on-all-whitelisted-projects'
+                    ])
                 );
-                $failures++;
+            } catch (\Exception $exception) {
+                $output->writeln(
+                    sprintf('[General error] Dispatch failed for: %s/%s', $username, $repository)
+                );
             }
         }
-        return $failures > 0 ? Command::FAILURE : Command::SUCCESS;
+
+        // Allow individual repositories to fail, but catch the latest exception and re-throw it.
+        if ($exception) {
+            throw $exception;
+        }
+        return Command::SUCCESS;
     }
 }

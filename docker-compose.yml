@@ -3,8 +3,7 @@ version: '3.7'
 services:
   app:
     container_name: "drupal-repository-webhook"
-    image: ghcr.io/city-of-helsinki/drupal-repository:latest
-    restart: always
+    build: .
     volumes:
       - .:/app:delegated
       - ./hooks.json:/etc/webhook/hooks.json
@@ -12,31 +11,35 @@ services:
       - .env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`webhook.drupal.hel.ninja`)"
+      - "traefik.http.routers.app.entrypoints=https"
+      - "traefik.http.routers.app.rule=Host(`helfi-webhook.docker.so`)"
       - "traefik.http.routers.app.tls=true"
-      - "traefik.http.routers.app.tls.certresolver=le"
+      - "traefik.docker.network=stonehenge-network"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     networks:
       - internal
-      - traefik-network
+      - stonehenge-network
+
   nginx:
     container_name: "drupal-repository-nginx"
     image: nginx:alpine
-    restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./dist:/usr/share/nginx/html
     networks:
-      - traefik-network
+      - stonehenge-network
       - internal
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`repository.drupal.hel.ninja`)"
+      - "traefik.http.routers.nginx.entrypoints=https"
+      - "traefik.http.routers.nginx.rule=Host(`helfi-repository.docker.so`)"
       - "traefik.http.services.nginx.loadbalancer.server.port=8080"
       - "traefik.http.routers.nginx.tls=true"
-      - "traefik.http.routers.nginx.tls.certresolver=le"
+      - "traefik.docker.network=stonehenge-network"
 
 networks:
   internal:
     external: false
-  traefik-network:
+  stonehenge-network:
     external: true

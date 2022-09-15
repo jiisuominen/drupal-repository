@@ -11,7 +11,9 @@ use Github\Client;
 use Symfony\Component\Console\Application;
 
 $config = [
-    'dispatch-triggers' => [
+    Settings::ENV => getenv('APP_ENV') ?: 'local',
+    Settings::GITHUB_OAUTH => getenv(Settings::GITHUB_OAUTH),
+    Settings::DISPATCH_TRIGGER => [
         'config-update' => [
             [
                 'username' => 'City-of-Helsinki',
@@ -45,6 +47,10 @@ $config = [
                 'username' => 'City-of-Helsinki',
                 'repository' => 'drupal-helfi-kuva',
             ],
+            [
+                'username' => 'City-of-Helsinki',
+                'repository' => 'drupal-helfi-rekry',
+            ],
         ],
     ],
 ];
@@ -52,6 +58,6 @@ $config = [
 $settings = new Settings($config);
 
 $application = new Application();
-$application->add(new RebuildPackageIndex());
+$application->add(new RebuildPackageIndex($settings));
 $application->add(new TriggerDispatchEvent(new Client(), $settings));
 $application->run();

@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use App\Settings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
 abstract class BaseCommand extends Command
 {
+
+    public function __construct(protected Settings $settings, string $name = null)
+    {
+        parent::__construct($name);
+    }
+
     protected function outputCallback(OutputInterface $output) : callable
     {
         return function ($type, $buffer) use ($output) {
@@ -19,6 +26,11 @@ abstract class BaseCommand extends Command
 
     protected function ensureInstallation(OutputInterface $output) : void
     {
+        // Skip this task on production since everything should be build on
+        // deploy.
+        if ($this->settings->get(Settings::ENV) === 'production') {
+            return;
+        }
         (new Process(['/usr/bin/make']))
             ->run($this->outputCallback($output));
     }
