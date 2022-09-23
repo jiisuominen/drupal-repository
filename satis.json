@@ -78,11 +78,6 @@
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-azure-fs.git"
         },
         {
-            "name": "nodespark/des-connector",
-            "type": "vcs",
-            "url": "git@github.com:tuutti/des-connector.git"
-        },
-        {
             "name": "drupal/helfi_media_map",
             "type": "vcs",
             "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-media-map.git"
