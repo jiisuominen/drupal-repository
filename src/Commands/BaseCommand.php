@@ -32,6 +32,7 @@ abstract class BaseCommand extends Command
             return;
         }
         (new Process(['/usr/bin/make']))
+            ->setTimeout(3600)
             ->run($this->outputCallback($output));
     }
 }

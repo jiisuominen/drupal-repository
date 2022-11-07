@@ -5,9 +5,6 @@
     "include-filename": "all.json",
     "repositories": [
         {
-            "packagist.org": false
-        },
-        {
             "name": "drupal/api_tools",
             "type": "vcs",
             "url": "git@github.com:druidfi/api_tools.git"
