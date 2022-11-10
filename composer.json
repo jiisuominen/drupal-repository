@@ -5,7 +5,8 @@
         "symfony/process": "^5.3",
         "knplabs/github-api": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "http-interop/http-factory-guzzle": "^1.0"
+        "http-interop/http-factory-guzzle": "^1.0",
+        "t4web/composer-lock-parser": "^1.2"
     },
     "config": {
         "platform": {

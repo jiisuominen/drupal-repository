@@ -12,127 +12,192 @@
         {
             "name": "city-of-helsinki/drupal-helfi-platform",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-helfi-platform.git"
+            "url": "git@github.com:city-of-helsinki/drupal-helfi-platform.git"
         },
         {
             "name": "drupal/hdbt",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-hdbt.git"
+            "url": "git@github.com:city-of-helsinki/drupal-hdbt.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-hdbt",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/hdbt_admin",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-hdbt-admin.git"
+            "url": "git@github.com:city-of-helsinki/drupal-hdbt-admin.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-hdbt-admin",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_api_base",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-api-base.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-api-base.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-api-base",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_tpr",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tpr.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-tpr.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-tpr",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_tunnistamo",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-tunnistamo.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-tunnistamo.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-tunnistamo",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_platform_config",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-helfi-platform-config.git"
+            "url": "git@github.com:city-of-helsinki/drupal-helfi-platform-config.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-helfi-platform-config",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_ahjo",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-ahjo.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-ahjo.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-ahjo",
+                "whitelisted": true
+            }
         },
         {
-            "name": "City-of-Helsinki/php-hauki-client",
+            "name": "city-of-helsinki/php-hauki-client",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/php-hauki-client.git"
+            "url": "git@github.com:city-of-helsinki/php-hauki-client.git"
         },
         {
             "name": "drupal/helfi_hauki",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-hauki.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-hauki.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-hauki",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_grant_applications_config",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-grant-application.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-grant-application.git"
         },
         {
             "name": "drupal/helfi_linkedevents",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-linkedevents.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-linkedevents.git"
         },
         {
             "name": "drupal/helfi_azure_fs",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-azure-fs.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-azure-fs.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-azure-fs",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_media_map",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-media-map.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-media-map.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-media-map",
+                "whitelisted": true
+            }
         },
         {
             "name": "twistor/stream-util",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/stream-util.git"
+            "url": "git@github.com:city-of-helsinki/stream-util.git"
         },
         {
             "name": "wa72/htmlpagedom",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/php-htmlpagedom.git"
+            "url": "git@github.com:city-of-helsinki/php-htmlpagedom.git"
         },
         {
             "name": "drupal/helfi_proxy",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-proxy.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-proxy.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-proxy",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_media_formtool",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-media-formtool.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-media-formtool.git"
         },
         {
             "name": "drupal/helfi_drupal_tools",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-tools.git"
+            "url": "git@github.com:city-of-helsinki/drupal-tools.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-tools",
+                "whitelisted": true
+            }
         },
         {
             "name": "drupal/helfi_atv",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-atv.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-atv.git"
         },
         {
             "name": "drupal/helfi_helsinki_profiili",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-helsinki-profiili.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-helsinki-profiili.git"
         },
         {
             "name": "drupal/helfi_yjdh",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-yjdh.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-yjdh.git"
         },
         {
             "name": "drupal/helfi_formtool_embed",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-form-tool-embed.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-form-tool-embed.git"
         },
         {
             "name": "drupal/helfi_gredi",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-gredi.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-gredi.git"
         },
         {
             "name": "drupal/helfi_navigation",
             "type": "vcs",
-            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-navigation.git"
+            "url": "git@github.com:city-of-helsinki/drupal-module-helfi-navigation.git",
+            "extra": {
+                "username": "city-of-helsinki",
+                "repository": "drupal-module-helfi-navigation",
+                "whitelisted": true
+            }
         }
     ]
 }
