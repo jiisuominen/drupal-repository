@@ -14,39 +14,39 @@ use Symfony\Component\Console\Application;
 
 $projects = [
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-kymp',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-sote',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-strategia',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-tyo-yrittaminen',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-kasvatus-koulutus',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-asuminen',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-etusivu',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-kuva',
     ],
     [
-        'username' => 'City-of-Helsinki',
+        'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-rekry',
     ],
 ];
