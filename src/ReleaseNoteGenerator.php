@@ -11,6 +11,8 @@ use Github\Exception\ExceptionInterface;
 
 final class ReleaseNoteGenerator
 {
+    private const JIRA_BASE_URL = 'https://helsinkisolutionoffice.atlassian.net/browse';
+
     public function __construct(
         private Client $client,
         private string $authToken,
@@ -43,6 +45,16 @@ final class ReleaseNoteGenerator
             // Convert previous h2 to h3.
             str_replace('##', '###', $note['body']) .
             "\n";
+    }
+
+    private function postProcessNote(string $note) : string
+    {
+        // Convert issue IDs to Jira links.
+        return preg_replace(
+            '/\b[UHF][A-Z0-9_]+-[1-9][0-9]*/',
+            sprintf('[${0}](%s/${0})', self::JIRA_BASE_URL),
+            $note
+        );
     }
 
     private function hasChanges(string $username, string $repository, string $base, string $head): bool
@@ -143,10 +155,11 @@ final class ReleaseNoteGenerator
             );
         }
 
+        $changelog = $this->postProcessNote($changelog);
+
         if (mb_strlen($changelog) < 1) {
             return;
         }
-
         $this->client
             ->authenticate($this->authToken, authMethod: AuthMethod::ACCESS_TOKEN);
 
