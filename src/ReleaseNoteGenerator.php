@@ -123,6 +123,10 @@ final class ReleaseNoteGenerator
     ): void {
         $releases = $this->client->repos()->releases()->all($username, $repository);
 
+        // Generate release notes only if there's more than one release.
+        if (count($releases) <= 1) {
+            return;
+        }
         // First item should always be the first release and the next item
         // is the previous.
         $latest = current($releases);
