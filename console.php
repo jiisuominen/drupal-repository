@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 require __DIR__.'/vendor/autoload.php';
 
+use App\Commands\AutomationPullRequestChangelog;
 use App\Commands\RebuildPackageIndex;
-use App\Commands\ReleaseGenerator;
+use App\Commands\ReleaseChangelog;
 use App\Commands\TriggerDispatchEvent;
 use App\ReleaseNoteGenerator;
 use App\Settings;
@@ -79,18 +80,15 @@ $config = [
 
 $settings = new Settings($config);
 $client = new Client();
+$releaseNoteGenerator = new ReleaseNoteGenerator(
+    $client,
+    $settings->get(Settings::GITHUB_OAUTH),
+    $settings->get(Settings::ALLOWED_PACKAGES)
+);
 
 $application = new Application();
 $application->add(new RebuildPackageIndex($settings));
-$application->add(
-    new ReleaseGenerator(
-        new ReleaseNoteGenerator(
-            $client,
-            $settings->get(Settings::GITHUB_OAUTH),
-            $settings->get(Settings::ALLOWED_PACKAGES)
-        ),
-        $settings
-    )
-);
+$application->add(new ReleaseChangelog($releaseNoteGenerator, $settings));
+$application->add(new AutomationPullRequestChangelog($releaseNoteGenerator, $settings));
 $application->add(new TriggerDispatchEvent(new Client(), $settings));
 $application->run();

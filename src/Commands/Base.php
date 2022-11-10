@@ -9,12 +9,12 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
-abstract class BaseCommand extends Command
+abstract class Base extends Command
 {
 
-    public function __construct(protected Settings $settings, string $name = null)
+    public function __construct(protected Settings $settings)
     {
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function outputCallback(OutputInterface $output) : callable

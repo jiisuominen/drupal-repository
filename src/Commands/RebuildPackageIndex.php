@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
-final class RebuildPackageIndex extends BaseCommand
+#[AsCommand(
+    name: 'app:rebuild'
+)]
+final class RebuildPackageIndex extends Base
 {
-    protected static $defaultName = 'app:rebuild';
-
-    public function configure()
+    protected function configure(): void
     {
         $this->addArgument(
             'package',

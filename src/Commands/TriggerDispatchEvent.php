@@ -8,21 +8,22 @@ use App\Settings;
 use Github\AuthMethod;
 use Github\Client;
 use Github\Exception\ExceptionInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class TriggerDispatchEvent extends BaseCommand
+#[AsCommand(
+    name: 'app:dispatch',
+)]
+final class TriggerDispatchEvent extends Base
 {
-    protected static $defaultName = 'app:dispatch';
-
     public function __construct(
         private Client $client,
         Settings $settings,
-        string $name = null
     ) {
-        parent::__construct($settings, $name);
+        parent::__construct($settings);
     }
 
     public function configure()
@@ -64,7 +65,7 @@ final class TriggerDispatchEvent extends BaseCommand
                 ]);
             } catch (ExceptionInterface $exception) {
                 $output->writeln(
-                    vprintf('[Github error] Dispatch failed for: %s/%s. See %s for more information.', [
+                    vsprintf('[Github error] Dispatch failed for: %s/%s. See %s for more information.', [
                       $username,
                       $repository,
                       'https://github.com/City-of-Helsinki/drupal-helfi-platform/blob/main/documentation/automatic-updates.md#automatically-trigger-config-update-on-all-whitelisted-projects'
