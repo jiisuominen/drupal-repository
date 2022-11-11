@@ -9,6 +9,8 @@ final class Settings
     public const DISPATCH_TRIGGER = 'dispatch-triggers';
     public const GITHUB_OAUTH = 'GITHUB_OAUTH';
     public const ENV = 'APP_ENV';
+    public const CHANGELOG_PROJECTS = 'projects';
+    public const CHANGELOG_ALLOWED_PACKAGES = 'packages';
 
     public function __construct(private array $config)
     {

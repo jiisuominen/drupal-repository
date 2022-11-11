@@ -6,15 +6,24 @@ namespace App\Commands;
 
 use App\Settings;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
-abstract class BaseCommand extends Command
+abstract class Base extends Command
 {
 
-    public function __construct(protected Settings $settings, string $name = null)
+    public function __construct(protected Settings $settings)
     {
-        parent::__construct($name);
+        parent::__construct();
+    }
+
+    protected function configure()
+    {
+        parent::configure();
+
+        $this->addOption('ensure', mode: InputOption::VALUE_NONE);
     }
 
     protected function outputCallback(OutputInterface $output) : callable
@@ -24,11 +33,9 @@ abstract class BaseCommand extends Command
         };
     }
 
-    protected function ensureInstallation(OutputInterface $output) : void
+    protected function ensureInstallation(InputInterface $input, OutputInterface $output) : void
     {
-        // Skip this task on production since everything should be build on
-        // deploy.
-        if ($this->settings->get(Settings::ENV) === 'production') {
+        if (!$input->getOption('ensure')) {
             return;
         }
         (new Process(['/usr/bin/make']))

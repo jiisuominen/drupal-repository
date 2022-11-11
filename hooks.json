@@ -1,8 +1,176 @@
 [
   {
+    "id": "update-release-note",
+    "execute-command": "/usr/bin/php",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "pass-arguments-to-command":
+    [
+      {
+        "source": "string",
+        "name": "console.php"
+      },
+      {
+        "source": "string",
+        "name": "changelog:project-release"
+      },
+      {
+        "source": "string",
+        "name": "--project"
+      },
+      {
+        "source": "payload",
+        "name": "repository.full_name"
+      },
+      {
+        "source": "string",
+        "name": "--base"
+      },
+      {
+        "source": "payload",
+        "name": "release.tag_name"
+      }
+    ],
+    "trigger-rule":
+    {
+      "and": [
+        {
+          "match":
+          {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "published",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "action"
+            }
+          }
+        },
+      ]
+    }
+  },
+  {
+    "id": "update-automation-pull-request",
+    "execute-command": "/usr/bin/php",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "pass-arguments-to-command":
+    [
+      {
+        "source": "string",
+        "name": "console.php"
+      },
+      {
+        "source": "string",
+        "name": "changelog:automation-pull-request"
+      },
+      {
+        "source": "string",
+        "name": "--project"
+      },
+      {
+        "source": "payload",
+        "name": "repository.full_name"
+      },
+      {
+        "source": "string",
+        "name": "--base"
+      },
+      {
+        "source": "string",
+        "name": "dev"
+      },
+      {
+        "source": "string",
+        "name": "--head"
+      },
+      {
+        "source": "string",
+        "name": "update-configuration"
+      },
+      {
+        "source": "string",
+        "name": "--number"
+      },
+      {
+        "source": "payload",
+        "name": "pull_request.number"
+      }
+    ],
+    "trigger-rule":
+    {
+      "and": [
+        {
+          "match":
+          {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "or": [
+            {
+              "match":
+              {
+                "parameter":
+                {
+                  "source": "payload",
+                  "name": "action"
+                },
+                "type": "value",
+                "value": "opened"
+              }
+            },
+            {
+              "match":
+              {
+                "parameter":
+                {
+                  "source": "payload",
+                  "name": "action"
+                },
+                "type": "value",
+                "value": "synchronize"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": "trigger-dispatch",
     "execute-command": "/usr/bin/php",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
@@ -58,7 +226,7 @@
   {
     "id": "update-index",
     "execute-command": "/usr/bin/php",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
@@ -102,7 +270,7 @@
   {
     "id": "update-repository",
     "execute-command": "/usr/bin/make",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
