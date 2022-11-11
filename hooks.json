@@ -1,5 +1,73 @@
 [
   {
+    "id": "update-release-note",
+    "execute-command": "/usr/bin/php",
+    "command-working-directory": "/var/www/html",
+    "response-headers":
+    [
+      {
+        "name": "Access-Control-Allow-Origin",
+        "value": "*"
+      }
+    ],
+    "pass-arguments-to-command":
+    [
+      {
+        "source": "string",
+        "name": "console.php"
+      },
+      {
+        "source": "string",
+        "name": "changelog:project-release"
+      },
+      {
+        "source": "string",
+        "name": "--project"
+      },
+      {
+        "source": "payload",
+        "name": "repository.full_name"
+      },
+      {
+        "source": "string",
+        "name": "--base"
+      },
+      {
+        "source": "payload",
+        "name": "release.tag_name"
+      }
+    ],
+    "trigger-rule":
+    {
+      "and": [
+        {
+          "match":
+          {
+            "type": "payload-hmac-sha1",
+            "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
+            "parameter":
+            {
+              "source": "header",
+              "name": "X-Hub-Signature"
+            }
+          }
+        },
+        {
+          "match":
+          {
+            "type": "value",
+            "value": "published",
+            "parameter":
+            {
+              "source": "payload",
+              "name": "action"
+            }
+          }
+        },
+      ]
+    }
+  },
+  {
     "id": "update-automation-pull-request",
     "execute-command": "/usr/bin/php",
     "command-working-directory": "/var/www/html",
