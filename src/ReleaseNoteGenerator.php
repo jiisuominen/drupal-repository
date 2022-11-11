@@ -182,6 +182,8 @@ final class ReleaseNoteGenerator
         string $repository,
         string $base,
     ): void {
+        // Releases API returns 30 releases per page. This *will* fail for
+        // releases older than that.
         $releases = $this->client->repos()->releases()->all($username, $repository);
 
         // Generate release notes only if there's more than one release.
@@ -191,8 +193,8 @@ final class ReleaseNoteGenerator
 
         $latest = $previous = null;
 
-        // Releases are sorted by newest to oldest. Loop releases until we've found the matching
-        // base and one release before latest.
+        // Releases are sorted from newest to oldest. Loop releases until we've found the matching
+        // release and the release after that.
         foreach ($releases as $release) {
             if ($release['tag_name'] === $base) {
                 $latest = $release;

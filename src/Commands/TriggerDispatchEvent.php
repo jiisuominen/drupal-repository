@@ -26,8 +26,10 @@ final class TriggerDispatchEvent extends Base
         parent::__construct($settings);
     }
 
-    public function configure()
+    protected function configure(): void
     {
+        parent::configure();
+
         $this->addArgument(
             'workflowId',
             InputArgument::REQUIRED,
@@ -38,7 +40,7 @@ final class TriggerDispatchEvent extends Base
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this
-            ->ensureInstallation($output);
+            ->ensureInstallation($input, $output);
 
         $workflowId = $input->getArgument('workflowId');
         $setting    = $this->settings->get(Settings::DISPATCH_TRIGGER);

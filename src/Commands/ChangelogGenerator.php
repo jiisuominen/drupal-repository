@@ -20,7 +20,7 @@ abstract class ChangelogGenerator extends Base
 
     protected function getProjectSettings(string $projectName) : ? array
     {
-        foreach ($this->settings->get(Settings::ALLOWED_PROJECTS) as $project) {
+        foreach ($this->settings->get(Settings::CHANGELOG_PROJECTS) as $project) {
             ['username' => $username, 'repository' => $repository] = $project;
             $name = strtolower(sprintf('%s/%s', $username, $repository));
 

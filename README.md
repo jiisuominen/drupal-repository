@@ -1,6 +1,6 @@
 # Drupal Composer repository
 
-This is [composer](https://getcomposer.org/) repository to include custom Drupal modules/themes.
+This is composer repository used to distribute dependencies as part of [City-of-Helsinki/drupal-helfi-platform](https://github.com/City-of-Helsinki/drupal-helfi-platform) ecosystem.
 
 To use this, your `composer.json` should contain:
 
@@ -13,33 +13,29 @@ To use this, your `composer.json` should contain:
 ]
 ```
 
-## Adding your own package here
+## Adding a new package 
 
-See [Contact](#contact).
+Your package must contain a `composer.json` file.
 
-## Webhook to automatically update your package
+- Add your package to [satis.json](/satis.json) file.
+- Add the required webhook: [Update composer repository](#update-composer-repository).
+
+## Available webhooks 
+
+### Update composer repository
+
+In order for composer to figure out what packages have changed, the package index needs to be rebuilt on every commit.
 
 Go to Settings -> Webhooks -> Add webhook
 
 - Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-index`
 - Content type: `application/json`
+- Events: `Send everything`
+- Secret can be found on [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) confluence page.
 
-Secret can be found on [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) confluence page or by contacting us directly. See [Contact](#contact).
+## Documentation
 
-## Development
-
-*NOTE:* This is only required on the remote server.
-
-Create .env file that contains:
-
-```
-GITHUB_OAUTH=your-github-oauth-token
-# This is used to update individual packages
-WEBHOOK_SECRET=your-webhook-secret
-# This is used by this repository to trigger rebuilds
-WEBHOOK_UPDATE_SECRET=your-webhook-secret
-```
-See [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) page on confluence for more information.
+See [documentation](/documentation) for more documentation.
 
 ## Contact
 

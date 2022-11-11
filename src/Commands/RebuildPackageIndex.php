@@ -17,6 +17,8 @@ final class RebuildPackageIndex extends Base
 {
     protected function configure(): void
     {
+        parent::configure();
+
         $this->addArgument(
             'package',
             InputArgument::OPTIONAL,
@@ -43,7 +45,7 @@ final class RebuildPackageIndex extends Base
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this
-            ->ensureInstallation($output);
+            ->ensureInstallation($input, $output);
 
         $args = ['/usr/bin/php', '-dmemory_limit=-1', 'vendor/bin/satis', 'build', 'satis.json', 'dist'];
 
