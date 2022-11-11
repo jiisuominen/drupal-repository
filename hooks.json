@@ -2,7 +2,7 @@
   {
     "id": "update-release-note",
     "execute-command": "/usr/bin/php",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
@@ -70,7 +70,7 @@
   {
     "id": "update-automation-pull-request",
     "execute-command": "/usr/bin/php",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
@@ -170,7 +170,7 @@
   {
     "id": "trigger-dispatch",
     "execute-command": "/usr/bin/php",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
@@ -226,7 +226,7 @@
   {
     "id": "update-index",
     "execute-command": "/usr/bin/php",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
@@ -270,7 +270,7 @@
   {
     "id": "update-repository",
     "execute-command": "/usr/bin/make",
-    "command-working-directory": "/var/www/html",
+    "command-working-directory": "{{ getenv "PROJECT_DIR" }}",
     "response-headers":
     [
       {
