@@ -127,6 +127,18 @@
         {
           "match":
           {
+            "parameter":
+            {
+              "source": "payload",
+              "name": "pull_request.head.ref"
+            },
+            "type": "value",
+            "value": "update-configuration"
+          }
+        },
+        {
+          "match":
+          {
             "type": "payload-hmac-sha1",
             "secret": "{{ getenv "WEBHOOK_UPDATE_SECRET" }}",
             "parameter":
