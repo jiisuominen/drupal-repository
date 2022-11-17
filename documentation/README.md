@@ -9,7 +9,7 @@ Compares what's changed between two releases and generates a changelog according
 - Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-release-note`
 - Content type: `application/json`
 - See [Contact](#contact) for secret (`WEBHOOK_UPDATE_SECRET`).
-- Select individual events: `Releases`.
+- Select individual events: `Releases`. **Remember to unselect all other events**.
 
 
 ## Generate automatic changelog for "Automatic updates" pull request
@@ -23,7 +23,7 @@ See [documentation/automatic-updates.md](https://github.com/City-of-Helsinki/dru
 - Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-automation-pull-request`
 - Content type: `application/json`
 - See [Contact](#contact) for secret (`WEBHOOK_UPDATE_SECRET`).
-- Select individual events: `Pull requests`.
+- Select individual events: `Pull requests`. **Remember to unselect all other events**.
 
 ## Development
 
