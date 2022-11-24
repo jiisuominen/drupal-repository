@@ -40,7 +40,7 @@ final class TriggerDispatchEvent extends Base
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this
-            ->ensureInstallation($input, $output);
+            ->ensureInstallation($output);
 
         $workflowId = $input->getArgument('workflowId');
         $setting    = $this->settings->get(Settings::DISPATCH_TRIGGER);
@@ -70,6 +70,7 @@ final class TriggerDispatchEvent extends Base
                     vsprintf('[Github error] Dispatch failed for: %s/%s. See %s for more information.', [
                       $username,
                       $repository,
+                      // phpcs:ignore
                       'https://github.com/City-of-Helsinki/drupal-helfi-platform/blob/main/documentation/automatic-updates.md#automatically-trigger-config-update-on-all-whitelisted-projects'
                     ])
                 );

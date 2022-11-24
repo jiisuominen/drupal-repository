@@ -38,5 +38,4 @@ final class AutomationPullRequestChangelog extends ChangelogGenerator
         );
         return Command::SUCCESS;
     }
-
 }

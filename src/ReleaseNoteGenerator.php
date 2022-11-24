@@ -7,10 +7,11 @@ namespace App;
 use ComposerLockParser\Package;
 use Github\AuthMethod;
 use Github\Client;
-use Github\Exception\ExceptionInterface;
 
 final class ReleaseNoteGenerator
 {
+    use MarkdownProcessorTrait;
+
     private const JIRA_BASE_URL = 'https://helsinkisolutionoffice.atlassian.net/browse';
 
     public function __construct(
@@ -26,19 +27,15 @@ final class ReleaseNoteGenerator
             ->client
             ->authenticate($this->authToken, authMethod: AuthMethod::ACCESS_TOKEN);
 
-        try {
-            $note = $this
-                ->client
-                ->repos()
-                ->releases()
-                ->generateNotes($username, $repository, [
-                    'previous_tag_name' => $version['base'],
-                    'target_commitish' => $version['head'],
-                    'tag_name' => $version['head'],
-                ]);
-        } catch (ExceptionInterface) {
-            return null;
-        }
+        $note = $this
+            ->client
+            ->repos()
+            ->releases()
+            ->generateNotes($username, $repository, [
+                'previous_tag_name' => $version['base'],
+                'target_commitish' => $version['head'],
+                'tag_name' => $version['head'],
+            ]);
 
         return "## [$username/$repository](https://github.com/$username/$repository): " .
             "{$version['base']} to {$version['head']}\n" .
@@ -47,43 +44,12 @@ final class ReleaseNoteGenerator
             "\n";
     }
 
-    private function postProcessNote(string $note) : string
-    {
-        // Convert issue IDs to Jira links.
-        return preg_replace(
-            '/\b[UHF][A-Z0-9_]+-[1-9][0-9]*/',
-            sprintf('[${0}](%s/${0})', self::JIRA_BASE_URL),
-            $note
-        );
-    }
-
-    private function hasChanges(string $username, string $repository, string $base, string $head): bool
-    {
-        try {
-            $compare = $this->client
-                ->repos()
-                ->commits()
-                ->compare($username, $repository, $base, $head);
-        } catch (ExceptionInterface) {
-            return false;
-        }
-
-        $composerLockChanges = array_filter($compare['files'], function (array $file) {
-            return $file['filename'] === 'composer.lock';
-        });
-        return count($composerLockChanges) > 0;
-    }
-
     private function getComposerPackageVersions(string $username, $repository, string $reference): array
     {
-        try {
-            $data = $this->client
-                ->repos()
-                ->contents()
-                ->rawDownload($username, $repository, 'composer.lock', $reference);
-        } catch (ExceptionInterface) {
-            return [];
-        }
+        $data = $this->client
+            ->repos()
+            ->contents()
+            ->rawDownload($username, $repository, 'composer.lock', $reference);
         $decoded = json_decode($data, true);
 
         $packages = [];
@@ -120,7 +86,21 @@ final class ReleaseNoteGenerator
         return $versions;
     }
 
-    public function createChangelog(
+    private function hasChanges(string $username, string $repository, string $base, string $head): bool
+    {
+        $compare = $this->client
+            ->repos()
+            ->commits()
+            ->compare($username, $repository, $base, $head);
+
+        $composerLockChanges = array_filter($compare['files'], function (array $file) {
+            return $file['filename'] === 'composer.lock';
+        });
+        return count($composerLockChanges) > 0;
+    }
+
+
+    private function createChangelog(
         string $username,
         string $repository,
         string $previous,
@@ -150,7 +130,7 @@ final class ReleaseNoteGenerator
             );
         }
 
-        $changelog = $this->postProcessNote($changelog);
+        $changelog = $this->processMarkdown($changelog);
 
         if (mb_strlen($changelog) < 1) {
             return null;
