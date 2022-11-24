@@ -1,4 +1,6 @@
 {
+    "name": "city-of-helsinki/drupal-repository",
+    "description": "",
     "require": {
         "composer/satis": "dev-main",
         "symfony/console": "^6.0",
