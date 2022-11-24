@@ -8,10 +8,10 @@ trait MarkdownProcessorTrait
 {
     public function processMarkdown(string $note) : string
     {
-        // Remove usernames from notes. For example "Update mariadb Docker tag to v10.10 by @renovate in {url}"
+        // Remove @ mentions from notes. For example "Update mariadb Docker tag to v10.10 by @renovate in {url}"
         // should become "Update mariadb Docker in {url}".
         $note = preg_replace(
-            '/\b by @\b[\w-]*/',
+            '/\b by @[\w-]+/',
             '',
             $note,
         );
@@ -22,9 +22,10 @@ trait MarkdownProcessorTrait
 
         // Convert issue IDs to Jira links.
         return preg_replace(
-            '/\b[UHF][A-Z0-9_]+-[1-9][0-9]*/',
+            '/\bUHF-[1-9][0-9]*\b/i',
             sprintf('[${0}](%s/${0})', self::JIRA_BASE_URL),
             $note
         );
     }
+
 }
