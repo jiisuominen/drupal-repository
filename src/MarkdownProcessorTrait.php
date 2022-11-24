@@ -27,5 +27,4 @@ trait MarkdownProcessorTrait
             $note
         );
     }
-
 }
