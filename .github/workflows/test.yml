@@ -1,0 +1,39 @@
+name: Drupal
+
+on:
+    pull_request:
+    push:
+        branches:
+            - 3.x
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php-versions: ['8.1']
+        steps:
+
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 1
+            - name: Setup PHP with composer v2
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '${{ matrix.php-versions }}'
+                  tools: composer:v2
+            - name: Validate composer.json
+              run: composer validate
+
+            - name: Install Composer dependencies
+              run: composer install --prefer-dist --optimize-autoloader --no-progress
+
+            - name: Lint
+              run: |
+                  vendor/bin/phpcs src tests --standard=PSR2
+
+            - name: Run PHPUnit tests
+              run: |
+                  set -o pipefail && vendor/bin/phpunit --verbose

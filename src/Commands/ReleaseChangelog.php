@@ -29,5 +29,4 @@ final class ReleaseChangelog extends ChangelogGenerator
         );
         return Command::SUCCESS;
     }
-
 }

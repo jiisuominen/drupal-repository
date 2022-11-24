@@ -37,5 +37,4 @@ abstract class ChangelogGenerator extends Base
             ->addOption('base', mode: InputOption::VALUE_REQUIRED)
             ->addOption('head', mode: InputOption::VALUE_OPTIONAL);
     }
-
 }

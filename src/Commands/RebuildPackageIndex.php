@@ -45,7 +45,7 @@ final class RebuildPackageIndex extends Base
     public function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this
-            ->ensureInstallation($input, $output);
+            ->ensureInstallation($output);
 
         $args = ['/usr/bin/php', '-dmemory_limit=-1', 'vendor/bin/satis', 'build', 'satis.json', 'dist'];
 
