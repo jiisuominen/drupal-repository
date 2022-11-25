@@ -25,21 +25,15 @@ See [documentation/automatic-updates.md](https://github.com/City-of-Helsinki/dru
 - See [Contact](#contact) for secret (`WEBHOOK_UPDATE_SECRET`).
 - Select individual events: `Pull requests`. **Remember to unselect all other events**.
 
-## Development
-
-*NOTE:* This is only required on the remote server.
-
-Create .env file that contains:
+## Environment variables
 
 ```
 GITHUB_OAUTH=your-github-oauth-token
-# This is used to update individual packages
+# This is used to update individual packages (satis rebuilds)
 WEBHOOK_SECRET=your-webhook-secret
-# This is used by this repository to trigger rebuilds
+# This is used by this repository to trigger GitHub actions
 WEBHOOK_UPDATE_SECRET=your-webhook-secret
 ```
-See [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) page on confluence for more information.
-
 
 ### Test webhooks locally
 
