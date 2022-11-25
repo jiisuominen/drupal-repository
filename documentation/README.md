@@ -1,10 +1,10 @@
 # Documentation
 
+See [hooks.json](/hooks.json) to see what console command is called for each action.
+
 ## Automatic changelog generation
 
-Uses GitHub's [Generate release notes content for a release](https://docs.github.com/en/rest/releases/releases#generate-release-notes-content-for-a-release) API to compare what's changed between head and base.
-
-The tool fetches `composer.lock` from both (head and base), then compares what's changed and uses the GitHub API to generate a changelog for each module. 
+The tool fetches `composer.lock` for given `{head}` and `{base}` commits, then compares what modules have changed and uses the [Generate release notes content for a release](https://docs.github.com/en/rest/releases/releases#generate-release-notes-content-for-a-release) API to generate a changelog for each module. 
 
 This is limited to:
 - `$projects` listed in [console.php](/console.php) with `changelog` setting.
@@ -12,7 +12,7 @@ This is limited to:
 
 ### Generate automatic release changelog for project releases
 
-Compares what's changed between two releases and generates a changelog accordingly.
+Takes a `{base}` release as an argument, fetches the previous release automatically as `{head}`, then compares what's changed between the two and updates the release body automatically.
 
 #### Webhook
 
@@ -24,7 +24,7 @@ Compares what's changed between two releases and generates a changelog according
 
 ### Generate automatic changelog for "Automatic updates" pull request
 
-Generates a changelog for automatic updates.
+Generates a changelog for changes between `dev` and `update-config` branches and updates the pull request body automatically.
 
 See [documentation/automatic-updates.md](https://github.com/City-of-Helsinki/drupal-helfi-platform/blob/main/documentation/automatic-updates.md) for documentation about automatic updates.
 
