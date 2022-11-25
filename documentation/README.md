@@ -1,10 +1,20 @@
 # Documentation
 
-## Generate automatic release changelog for project releases
+## Automatic changelog generation
+
+Uses GitHub's [Generate release notes content for a release](https://docs.github.com/en/rest/releases/releases#generate-release-notes-content-for-a-release) API to compare what's changed between head and base.
+
+The tool fetches `composer.lock` from both (head and base), then compares what's changed and uses the GitHub API to generate a changelog for each module. 
+
+This is limited to:
+- `$projects` listed in [console.php](/console.php) with `changelog` setting.
+- Modules with `whitelisted` set to `true` in [satis.json](/satis.json).
+
+### Generate automatic release changelog for project releases
 
 Compares what's changed between two releases and generates a changelog accordingly.
 
-### Webhook
+#### Webhook
 
 - Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-release-note`
 - Content type: `application/json`
@@ -12,13 +22,13 @@ Compares what's changed between two releases and generates a changelog according
 - Select individual events: `Releases`. **Remember to unselect all other events**.
 
 
-## Generate automatic changelog for "Automatic updates" pull request
+### Generate automatic changelog for "Automatic updates" pull request
 
 Generates a changelog for automatic updates.
 
 See [documentation/automatic-updates.md](https://github.com/City-of-Helsinki/drupal-helfi-platform/blob/main/documentation/automatic-updates.md) for documentation about automatic updates.
 
-### Webhook
+#### Webhook
 
 - Payload URL: `https://webhook.drupal.hel.ninja/hooks/update-automation-pull-request`
 - Content type: `application/json`
