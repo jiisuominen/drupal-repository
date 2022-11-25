@@ -23,6 +23,8 @@ final class AutomationPullRequestChangelog extends ChangelogGenerator
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->validateOptions($input, ['project', 'base', 'head', 'number']);
+
         $settings = $this->getProjectSettings($input->getOption('project'));
 
         if (!$settings) {

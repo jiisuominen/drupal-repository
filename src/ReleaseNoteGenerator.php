@@ -7,62 +7,79 @@ namespace App;
 use ComposerLockParser\Package;
 use Github\AuthMethod;
 use Github\Client;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 final class ReleaseNoteGenerator
 {
     use MarkdownProcessorTrait;
-
-    private const JIRA_BASE_URL = 'https://helsinkisolutionoffice.atlassian.net/browse';
+    use CacheTrait;
 
     public function __construct(
-        private Client $client,
-        private string $authToken,
-        private array $allowedPackages
+        private readonly Client $client,
+        private readonly CacheInterface $cache,
+        private readonly string $authToken,
+        private readonly array $allowedPackages
     ) {
     }
 
     private function createNote(string $username, string $repository, array $version): ? string
     {
-        $this
-            ->client
-            ->authenticate($this->authToken, authMethod: AuthMethod::ACCESS_TOKEN);
+        $key = $this->getCacheKey($username, $repository, $version['base'], $version['head']);
 
-        $note = $this
-            ->client
-            ->repos()
-            ->releases()
-            ->generateNotes($username, $repository, [
-                'previous_tag_name' => $version['base'],
-                'target_commitish' => $version['head'],
-                'tag_name' => $version['head'],
-            ]);
+        return $this->cache->get($key, function (ItemInterface $item) use ($username, $repository, $version) {
+            $this
+                ->client
+                ->authenticate($this->authToken, authMethod: AuthMethod::ACCESS_TOKEN);
 
-        return "## [$username/$repository](https://github.com/$username/$repository): " .
-            "{$version['base']} to {$version['head']}\n" .
-            // Convert previous h2 to h3.
-            str_replace('##', '###', $note['body']) .
-            "\n";
+            $note = $this
+                ->client
+                ->repos()
+                ->releases()
+                ->generateNotes($username, $repository, [
+                    'previous_tag_name' => $version['base'],
+                    'target_commitish' => $version['head'],
+                    'tag_name' => $version['head'],
+                ]);
+            // Cache for 60 seconds, so we don't unnecessarily loop the GitHub API when
+            // automation updates all our projects at once.
+            $item->expiresAfter(60);
+
+            return "## [$username/$repository](https://github.com/$username/$repository): " .
+                "{$version['base']} to {$version['head']}\n" .
+                // Convert previous h2 to h3.
+                str_replace('##', '###', $note['body']) .
+                "\n";
+        });
     }
 
     private function getComposerPackageVersions(string $username, $repository, string $reference): array
     {
-        $data = $this->client
-            ->repos()
-            ->contents()
-            ->rawDownload($username, $repository, 'composer.lock', $reference);
-        $decoded = json_decode($data, true);
+        $key = $this->getCacheKey($username, $repository, $reference);
 
-        $packages = [];
-        foreach ($decoded['packages'] as $packageInfo) {
-            $package = Package::factory($packageInfo);
+        return $this->cache->get($key, function (ItemInterface $item) use ($username, $repository, $reference) {
+            $data = $this->client
+                ->repos()
+                ->contents()
+                ->rawDownload($username, $repository, 'composer.lock', $reference);
+            $decoded = json_decode($data, true);
 
-            // Ignore non-whitelisted packages.
-            if (!in_array($package->getName(), array_keys($this->allowedPackages))) {
-                continue;
+            $packages = [];
+            foreach ($decoded['packages'] as $packageInfo) {
+                $package = Package::factory($packageInfo);
+
+                // Ignore non-whitelisted packages.
+                if (!in_array($package->getName(), array_keys($this->allowedPackages))) {
+                    continue;
+                }
+                $packages[$package->getName()] = $package->getVersion();
             }
-            $packages[$package->getName()] = $package->getVersion();
-        }
-        return $packages;
+            // Cache for 60 seconds, so we don't unnecessarily loop the GitHub API when
+            // automation updates all our projects at once.
+            $item->expiresAfter(60);
+
+            return $packages;
+        });
     }
 
     private function getUpdatedDependencies(
@@ -88,15 +105,23 @@ final class ReleaseNoteGenerator
 
     private function hasChanges(string $username, string $repository, string $base, string $head): bool
     {
-        $compare = $this->client
-            ->repos()
-            ->commits()
-            ->compare($username, $repository, $base, $head);
+        $key = $this->getCacheKey($username, $repository, $base, $head);
 
-        $composerLockChanges = array_filter($compare['files'], function (array $file) {
-            return $file['filename'] === 'composer.lock';
+        return $this->cache->get($key, function (ItemInterface $item) use ($username, $repository, $base, $head) {
+            $compare = $this->client
+                ->repos()
+                ->commits()
+                ->compare($username, $repository, $base, $head);
+
+            $composerLockChanges = array_filter($compare['files'], function (array $file) {
+                return $file['filename'] === 'composer.lock';
+            });
+            // Cache for 60 seconds, so we don't unnecessarily loop the GitHub API when
+            // automation updates all our projects at once.
+            $item->expiresAfter(60);
+
+            return count($composerLockChanges) > 0;
         });
-        return count($composerLockChanges) > 0;
     }
 
 
@@ -104,17 +129,23 @@ final class ReleaseNoteGenerator
         string $username,
         string $repository,
         string $previous,
-        string $latest
+        string $latest,
+        bool $generateProjectChangelog,
     ) : ? string {
         if (!$this->hasChanges($username, $repository, $previous, $latest)) {
             return null;
         }
 
-        // Create changelog for project repository.
-        $changelog = $this->createNote($username, $repository, [
-            'base' => $previous,
-            'head' => $latest
-        ]);
+        $changelog = '';
+        // This cannot be generated for automation pull requests because it uses
+        // branches.
+        if ($generateProjectChangelog) {
+            // Create changelog for project repository.
+            $changelog = $this->createNote($username, $repository, [
+                'base' => $previous,
+                'head' => $latest
+            ]);
+        }
         $changelog .= "\n";
 
         // Create changelog for each updated dependency.
@@ -145,7 +176,13 @@ final class ReleaseNoteGenerator
         string $head,
         string $pullRequest
     ): void {
-        $changelog = $this->createChangelog($username, $repository, $base, $head);
+        $changelog = $this->createChangelog(
+            $username,
+            $repository,
+            $base,
+            $head,
+            false
+        );
 
         $this->client
             ->authenticate($this->authToken, authMethod: AuthMethod::ACCESS_TOKEN);
@@ -191,7 +228,13 @@ final class ReleaseNoteGenerator
             throw new \InvalidArgumentException('Failed to parse latest or previous release.');
         }
         $changelog = $this
-            ->createChangelog($username, $repository, $previous['tag_name'], $latest['tag_name']);
+            ->createChangelog(
+                $username,
+                $repository,
+                $previous['tag_name'],
+                $latest['tag_name'],
+                true
+            );
 
         $this->client
             ->authenticate($this->authToken, authMethod: AuthMethod::ACCESS_TOKEN);

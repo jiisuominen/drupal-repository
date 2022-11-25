@@ -16,6 +16,8 @@ final class ReleaseChangelog extends ChangelogGenerator
 {
     public function execute(InputInterface $input, OutputInterface $output): int
     {
+        $this->validateOptions($input, ['project', 'base']);
+
         $settings = $this->getProjectSettings($input->getOption('project'));
 
         if (!$settings) {

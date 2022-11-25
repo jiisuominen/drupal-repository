@@ -6,12 +6,12 @@ namespace App;
 
 trait MarkdownProcessorTrait
 {
-    public function processMarkdown(string $note) : string
+    protected function processMarkdown(string $note) : string
     {
         // Remove @ mentions from notes. For example "Update mariadb Docker tag to v10.10 by @renovate in {url}"
         // should become "Update mariadb Docker in {url}".
         $note = preg_replace(
-            '/\b by @[\w-]+/',
+            '/\s\bby @[\w-]+/',
             '',
             $note,
         );
@@ -23,7 +23,7 @@ trait MarkdownProcessorTrait
         // Convert issue IDs to Jira links.
         return preg_replace(
             '/\bUHF-[1-9][0-9]*\b/i',
-            sprintf('[${0}](%s/${0})', self::JIRA_BASE_URL),
+            sprintf('[${0}](%s/${0})', 'https://helsinkisolutionoffice.atlassian.net/browse'),
             $note
         );
     }
