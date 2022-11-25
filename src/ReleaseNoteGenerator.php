@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace App;
 
-use ComposerLockParser\Package;
 use Github\AuthMethod;
 use Github\Client;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -65,14 +64,17 @@ final class ReleaseNoteGenerator
             $decoded = json_decode($data, true);
 
             $packages = [];
-            foreach ($decoded['packages'] as $packageInfo) {
-                $package = Package::factory($packageInfo);
+            foreach ($decoded['packages'] as $package) {
+                [
+                    'name' => $name,
+                    'version' => $version,
+                ] = $package + ['name' => null, 'version' => null];
 
                 // Ignore non-whitelisted packages.
-                if (!in_array($package->getName(), array_keys($this->allowedPackages))) {
+                if (!in_array($name, array_keys($this->allowedPackages))) {
                     continue;
                 }
-                $packages[$package->getName()] = $package->getVersion();
+                $packages[$name] = $version;
             }
             // Cache for 60 seconds, so we don't unnecessarily loop the GitHub API when
             // automation updates all our projects at once.
