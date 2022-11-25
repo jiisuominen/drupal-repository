@@ -11,6 +11,8 @@ use App\Commands\TriggerDispatchEvent;
 use App\ReleaseNoteGenerator;
 use App\Settings;
 use Github\Client;
+use Symfony\Component\Cache\Adapter\ApcuAdapter;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Console\Application;
 
 // The 'dispatch-triggers' setting should contain all triggers that can be triggered for project.
@@ -106,6 +108,9 @@ $settings = new Settings([
 $client = new Client();
 $releaseNoteGenerator = new ReleaseNoteGenerator(
     $client,
+    new FilesystemAdapter(
+        defaultLifetime: 60,
+    ),
     $settings->get(Settings::GITHUB_OAUTH),
     $settings->get(Settings::CHANGELOG_ALLOWED_PACKAGES)
 );
