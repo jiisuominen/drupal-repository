@@ -9,7 +9,7 @@ use Github\Client;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-final class ReleaseNoteGenerator
+final class ReleaseNoteGenerator implements ReleaseNoteGeneratorInterface
 {
     use MarkdownProcessorTrait;
     use CacheTrait;
@@ -24,7 +24,7 @@ final class ReleaseNoteGenerator
 
     private function createNote(string $username, string $repository, array $version): ? string
     {
-        $key = $this->getCacheKey($username, $repository, $version['base'], $version['head']);
+        $key = $this->getCacheKey('create-note', $username, $repository, $version['base'], $version['head']);
 
         return $this->cache->get($key, function (ItemInterface $item) use ($username, $repository, $version) {
             $this
@@ -54,7 +54,7 @@ final class ReleaseNoteGenerator
 
     private function getComposerPackageVersions(string $username, $repository, string $reference): array
     {
-        $key = $this->getCacheKey($username, $repository, $reference);
+        $key = $this->getCacheKey('package-versions', $username, $repository, $reference);
 
         return $this->cache->get($key, function (ItemInterface $item) use ($username, $repository, $reference) {
             $data = $this->client
@@ -107,7 +107,7 @@ final class ReleaseNoteGenerator
 
     private function hasChanges(string $username, string $repository, string $base, string $head): bool
     {
-        $key = $this->getCacheKey($username, $repository, $base, $head);
+        $key = $this->getCacheKey('has-changes', $username, $repository, $base, $head);
 
         return $this->cache->get($key, function (ItemInterface $item) use ($username, $repository, $base, $head) {
             $compare = $this->client

@@ -4,16 +4,8 @@ declare(strict_types=1);
 
 require __DIR__.'/vendor/autoload.php';
 
-use App\Commands\AutomationPullRequestChangelog;
-use App\Commands\RebuildPackageIndex;
-use App\Commands\ReleaseChangelog;
-use App\Commands\TriggerDispatchEvent;
-use App\ReleaseNoteGenerator;
+use App\Kernel;
 use App\Settings;
-use Github\Client;
-use Symfony\Component\Cache\Adapter\ApcuAdapter;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Console\Application;
 
 // The 'dispatch-triggers' setting should contain all triggers that can be triggered for project.
 // For example, add 'config-update', if you wish 'app:dispatch' command to trigger 'config-update'
@@ -105,19 +97,5 @@ $settings = new Settings([
         }),
     ],
 ]);
-$client = new Client();
-$releaseNoteGenerator = new ReleaseNoteGenerator(
-    $client,
-    new FilesystemAdapter(
-        defaultLifetime: 60,
-    ),
-    $settings->get(Settings::GITHUB_OAUTH),
-    $settings->get(Settings::CHANGELOG_ALLOWED_PACKAGES)
-);
-
-$application = new Application();
-$application->add(new RebuildPackageIndex($settings));
-$application->add(new ReleaseChangelog($releaseNoteGenerator, $settings));
-$application->add(new AutomationPullRequestChangelog($releaseNoteGenerator, $settings));
-$application->add(new TriggerDispatchEvent(new Client(), $settings));
+$application = Kernel::boot($settings);
 $application->run();
