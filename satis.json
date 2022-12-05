@@ -198,6 +198,11 @@
                 "repository": "drupal-module-helfi-navigation",
                 "whitelisted": true
             }
+        },
+        {
+            "name": "nodespark/des-connector",
+            "type": "vcs",
+            "url": "git@github.com:tuutti/des-connector.git"
         }
     ]
 }
