@@ -66,6 +66,16 @@ $projects = [
         'dispatch-triggers' => ['config-update'],
         'changelog' => true,
     ],
+    [
+        'username' => 'city-of-helsinki',
+        'repository' => 'drupal-helfi-form-tool',
+        'dispatch-triggers' => ['config-update'],
+    ],
+    [
+        'username' => 'city-of-helsinki',
+        'repository' => 'hel-fi-drupal-grants',
+        'dispatch-triggers' => ['config-update'],
+    ],
 ];
 
 $data = json_decode(file_get_contents('satis.json'));
