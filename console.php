@@ -70,11 +70,13 @@ $projects = [
         'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-form-tool',
         'dispatch-triggers' => ['config-update'],
+        'changelog' => false,
     ],
     [
         'username' => 'city-of-helsinki',
         'repository' => 'hel-fi-drupal-grants',
         'dispatch-triggers' => ['config-update'],
+        'changelog' => false,
     ],
 ];
 
