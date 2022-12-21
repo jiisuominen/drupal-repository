@@ -70,11 +70,13 @@ $projects = [
         'username' => 'city-of-helsinki',
         'repository' => 'drupal-helfi-form-tool',
         'dispatch-triggers' => ['config-update'],
+        'changelog' => false,
     ],
     [
         'username' => 'city-of-helsinki',
         'repository' => 'hel-fi-drupal-grants',
         'dispatch-triggers' => ['config-update'],
+        'changelog' => false,
     ],
 ];
 
@@ -89,7 +91,7 @@ $settings = new Settings([
     Settings::ENV => getenv('APP_ENV') ?: 'local',
     Settings::GITHUB_OAUTH => getenv(Settings::GITHUB_OAUTH),
     Settings::CHANGELOG_PROJECTS => array_filter($projects, function (array $item) : bool {
-        return $item['changelog'] === true;
+        return isset($item['changelog']) && $item['changelog'] === true;
     }),
     Settings::CHANGELOG_ALLOWED_PACKAGES => array_filter($packages, function (object $package) : bool {
         $isWhitelisted = !empty($package->extra->whitelisted);
