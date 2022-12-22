@@ -33,6 +33,21 @@ Go to Settings -> Webhooks -> Add webhook
 - Events: `Send everything`
 - Secret can be found on [Composer repository](https://helsinkisolutionoffice.atlassian.net/wiki/spaces/HEL/pages/6501891919/Composer+repository) confluence page.
 
+## Known issues
+
+```
+In JsonFile.php line 347:
+"dist/all.json" does not contain valid JSON
+Parse error on line 52780:
+...} } }}ev": {
+------------------^
+Expected one of: 'EOF', '}', ',', ']'
+```
+
+Rebuild the index by calling `php console.php app:rebuild` inside Webhook container. 
+
+_NOTE_: Rebuilding can take up to 10 minutes.
+
 ## Documentation
 
 See [documentation](/documentation) for more documentation.
