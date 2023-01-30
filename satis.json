@@ -203,6 +203,11 @@
             "name": "nodespark/des-connector",
             "type": "vcs",
             "url": "git@github.com:tuutti/des-connector.git"
-        }
+        },
+        {
+            "name": "drupal/drupal/helfi_audit_log",
+            "type": "vcs",
+            "url": "git@github.com:City-of-Helsinki/drupal-module-helfi-audit-log.git"
+        },
     ]
 }
