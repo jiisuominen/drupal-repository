@@ -56,4 +56,4 @@ See [documentation](/documentation) for more documentation.
 
 Slack: #helfi-drupal (http://helsinkicity.slack.com/)
 
-Mail: drupal@hel.fi
+Mail: `drupal@hel.fi`
